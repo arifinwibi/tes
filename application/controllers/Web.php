@@ -6,7 +6,22 @@ Class Web extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('m_data');
         $this->load->helper('url');
+        
+    }
+    public function user()
+    {
+        $data=array(
+            'user'=>$this->m_data->ambil_data()->result(),
+            'judul'=>"Daftar User"
+        
+        );
+        
+        $data['user']= $this->m_data->ambil_data()->result();
+        $this->load->view('v_header',$data);
+        $this->load->view('v_user',$data);
+        $this->load->view('v_footer',$data);
     }
 
     public function index()
@@ -23,6 +38,7 @@ Class Web extends CI_Controller
         $this->load->view('v_blog',$data);
         $this->load->view('v_footer',$data);
     }
+
     public function about()
     {
         $data['judul'] = "About";
@@ -30,4 +46,5 @@ Class Web extends CI_Controller
         $this->load->view('v_about',$data);
         $this->load->view('v_footer',$data);
     }
+    
 }
